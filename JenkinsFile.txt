@@ -11,7 +11,7 @@ pipeline {
     // Artifacts Folder
     ArtifactsFolder = "Artifacts"
     // LifeTime Specific Variables
-    LifeTimeHostname = 'https://mdpl-dev.outsystemscloud.com/'
+    LifeTimeHostname = 'mdpl-dev.outsystemscloud.com/'
     LifeTimeAPIVersion = 0.2
     // Authentication Specific Variables
     AuthorizationToken = credentials('OutSystems_job')
