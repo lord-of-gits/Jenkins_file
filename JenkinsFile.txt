@@ -12,7 +12,7 @@ pipeline {
     ArtifactsFolder = "Artifacts"
     // LifeTime Specific Variables
     LifeTimeHostname = 'https://mdpl-dev.outsystemscloud.com/'
-    LifeTimeAPIVersion = 2
+    LifeTimeAPIVersion = 0.1
     // Authentication Specific Variables
     AuthorizationToken = credentials('OutSystems_job')
     // Environments Specification Variables
@@ -35,6 +35,7 @@ pipeline {
   stages {
     stage('Install Python Dependencies') {
       steps {
+        echo "hi am here"
         echo "Create ${env.ArtifactsFolder} Folder"
         powershell "mkdir ${env.ArtifactsFolder}"
         // Only the virtual environment needs to be installed at the system level
