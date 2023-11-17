@@ -6,10 +6,9 @@ pipeline {
     string(name: 'ApplicationScopeWithTests', defaultValue: '', description: 'Comma-separated list of LifeTime applications to deploy (including test applications)')
     string(name: 'TriggeredBy', defaultValue: 'N/A', description: 'Name of LifeTime user that triggered the pipeline remotely.')
   }
-  options { 
-echo "hi am here"
-skipStagesAfterUnstable() }
+  options { skipStagesAfterUnstable() }
   environment {
+echo "Hi am here"
     // Artifacts Folder
     ArtifactsFolder = "Artifacts"
     // LifeTime Specific Variables
