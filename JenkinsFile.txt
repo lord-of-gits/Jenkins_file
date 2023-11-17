@@ -11,11 +11,12 @@ pipeline {
     // Artifacts Folder
     ArtifactsFolder = "Artifacts"
     // LifeTime Specific Variables
-    LifeTimeHostname = 'https://pmdemo2-lt.outsystemsenterprise.com/'
+    LifeTimeHostname = 'https://mdpl-dev.outsystemscloud.com/'
     LifeTimeAPIVersion = 2
     // Authentication Specific Variables
-    AuthorizationToken = credentials('LifeTimeServiceAccountToken')
+    AuthorizationToken = credentials('OutSystems_job')
     // Environments Specification Variables
+    DevelopmentEnvironmentLabel = 'Production' 
     /*
     * Pipeline for 5 Environments:
     * DevelopmentEnvironment -> Where you develop your applications. This should be the default environment you connect with service studio.
