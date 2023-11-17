@@ -8,16 +8,15 @@ pipeline {
   }
   options { skipStagesAfterUnstable() }
   environment {
-echo "Hi am here"
     // Artifacts Folder
     ArtifactsFolder = "Artifacts"
     // LifeTime Specific Variables
     LifeTimeHostname = 'https://mdpl-dev.outsystemscloud.com/'
-    LifeTimeAPIVersion = 0.1
+    LifeTimeAPIVersion = 0.2
     // Authentication Specific Variables
     AuthorizationToken = credentials('OutSystems_job')
     // Environments Specification Variables
-    DevelopmentEnvironmentLabel = 'Production' 
+    DevelopmentEnvironmentLabel = 'Development' 
     /*
     * Pipeline for 5 Environments:
     * DevelopmentEnvironment -> Where you develop your applications. This should be the default environment you connect with service studio.
@@ -27,11 +26,11 @@ echo "Hi am here"
     * ProductionEnvironment -> Where your apps are live.
     */
     DevelopmentEnvironment = 'Development'
-    RegressionEnvironment = 'Beta Testing'
+    // RegressionEnvironment = 'Beta Testing'
     ProductionEnvironment = 'Production'
     // Regression URL Specification
-    ProbeEnvironmentURL = 'https://pmdemo2-tst.outsystemsenterprise.com/'
-    BddEnvironmentURL = 'https://pmdemo2-tst.outsystemsenterprise.com/'
+    ProbeEnvironmentURL = 'https://mdpl-dev.outsystemscloud.com/'
+    BddEnvironmentURL = 'https://mdpl-dev.outsystemscloud.com/'
   }
   stages {
     stage('Install Python Dependencies') {
