@@ -45,9 +45,9 @@ pipeline {
         withPythonEnv('python') {
           // sh scrsh script: 'ipt: 'pip install --upgrade pip''
           
-          sh script: 'pip install setuptools==57.5.0'
-          sh script: 'pip install --upgrade setuptools'
-          sh script: "pip install -U outsystems-pipeline==\"${env.OSPackageVersion}\"", label: 'Install required packages'
+          //sh script: 'pip install setuptools==57.5.0'
+          //sh script: 'pip install --upgrade setuptools'
+          //sh script: "pip install -U outsystems-pipeline==\"${env.OSPackageVersion}\"", label: 'Install required packages'
         }
 
       }
