@@ -11,10 +11,10 @@ pipeline {
     // Artifacts Folder
     ArtifactsFolder = "Artifacts"
     // LifeTime Specific Variables
-    LifeTimeHostname = 'mdpl-dev.outsystemscloud.com/'
-    LifeTimeAPIVersion = 0.2
+    LifeTimeHostname = 'mdpl-dev.outsystemscloud.com'
+    LifeTimeAPIVersion = 2
     // Authentication Specific Variables
-    AuthorizationToken = credentials('OutSystems_job')
+    AuthorizationToken = credentials('Ak_token')
     // Environments Specification Variables
     DevelopmentEnvironmentLabel = 'Development' 
     /*
@@ -43,9 +43,13 @@ pipeline {
         powershell 'pip install -q -I virtualenv --user'
         // Install the rest of the dependencies at the environment level and not the system level
         withPythonEnv('python') {
-          echo "Install Python requirements"
-          powershell 'pip install -U outsystems-pipeline'
+          // sh scrsh script: 'ipt: 'pip install --upgrade pip''
+          
+          sh script: 'pip install setuptools==57.5.0'
+          sh script: 'pip install --upgrade setuptools'
+          sh script: "pip install -U outsystems-pipeline==\"${env.OSPackageVersion}\"", label: 'Install required packages'
         }
+
       }
     }
     stage('Get and Deploy Latest Tags') {
@@ -54,7 +58,8 @@ pipeline {
           echo "Pipeline run triggered remotely by '${params.TriggeredBy}' for the following applications (including tests): '${params.ApplicationScopeWithTests}'"
           echo 'Retrieving latest application tags from Development environment...'
           // Retrive the Applications and Environment details from the Source environment
-          powershell "python -m outsystems.pipeline.fetch_lifetime_data --artifacts \"${env.ArtifactsFolder}\" --lt_url ${env.LifeTimeHostname} --lt_token ${env.AuthorizationToken} --lt_api_version ${env.LifeTimeAPIVersion}"
+          echo "Hi version in use is ${env.LifeTimeAPIVersion}"
+          powershell "python -m outsystems.pipeline.fetch_lifetime_data --artifacts \"${env.ArtifactsFolder}\" --lt_url ${env.LifeTimeHostname} --lt_token ${env.AuthorizationToken} --lt_api_version 2"
           echo 'Deploying latest application tags to Regression...'
           // Deploy the application list, with tests, to the Regression environment
           powershell "python -m outsystems.pipeline.deploy_latest_tags_to_target_env --artifacts \"${env.ArtifactsFolder}\" --lt_url ${env.LifeTimeHostname} --lt_token ${env.AuthorizationToken} --lt_api_version ${env.LifeTimeAPIVersion} --source_env \"${env.DevelopmentEnvironment}\" --destination_env \"${env.RegressionEnvironment}\" --app_list \"${params.ApplicationScopeWithTests}\""
