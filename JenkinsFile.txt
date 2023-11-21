@@ -54,7 +54,6 @@ pipeline {
         withPythonEnv('python') {
           echo "Pipeline run triggered remotely by '${params.TriggeredBy}' for the following applications (including tests): '${params.ApplicationScopeWithTests}'"
           echo 'Retrieving latest application tags from Development environment...'
-          echo 
           // Retrive the Applications and Environment details from the Source environment
           powershell "python -m outsystems.pipeline.fetch_lifetime_data --artifacts \"${env.ArtifactsFolder}\" --lt_url ${env.LifeTimeHostname} --lt_token ${env.AuthorizationToken} --lt_api_version 2"
           echo 'Deploying latest application tags to Regression...'
