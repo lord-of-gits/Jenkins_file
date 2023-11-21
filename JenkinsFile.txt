@@ -45,6 +45,7 @@ pipeline {
         withPythonEnv('python') {
           echo "Install Python requirements"
           powershell 'pip install -U outsystems-pipeline'
+          echo "pip install"
         }
       }
     }
